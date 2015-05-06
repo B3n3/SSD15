@@ -1,13 +1,13 @@
 <jeopardy>
     <categories>
         <category name="TU">
-            <question id="ID_1" value="100">
+            <question id="1" value="100">
                 <text>Dummy question 1?</text>
                 <answer correct="yes">Dummy answer 1.</answer>
                 <answer correct="no">Dummy answer 2.</answer>
                 <answer>Dummy answer 3.</answer>
             </question>
-            <question id="ID_2" value="200">
+            <question id="2" value="200">
                 <text>Dummy question 2?</text>
                 <answer correct="yes">Dummy answer 1.</answer>
                 <answer correct="no">Dummy answer 2.</answer>
@@ -15,13 +15,13 @@
             </question>
         </category>
         <category name="SSD">
-            <question id="ID_3" value="200">
+            <question id="3" value="200">
                 <text>Dummy question 3?</text>
                 <answer correct="yes">Dummy answer 1.</answer>
                 <answer>Dummy answer 2.</answer>
                 <answer>Dummy answer 3.</answer>
             </question>
-            <question id="ID_4" value="500">
+            <question id="4" value="500">
                 <text>Dummy question 4?</text>
                 <answer correct="yes">Dummy answer 1.</answer>
                 <answer correct="no">Dummy answer 2.</answer>
@@ -29,13 +29,13 @@
             </question>
         </category>
         <category name="Web">
-            <question id="ID_5" value="500">
+            <question id="5" value="500">
                 <text>Dummy question 5?</text>
                 <answer correct="yes">Dummy answer 1.</answer>
                 <answer correct="no">Dummy answer 2.</answer>
                 <answer>Dummy answer 3.</answer>
             </question>
-            <question id="ID_6" value="1000">
+            <question id="6" value="1000">
                 <text>Dummy question 6?</text>
                 <answer correct="yes">Dummy answer 1.</answer>
                 <answer>Dummy answer 2.</answer>
@@ -81,11 +81,11 @@
         <game session="SessionID_1">
             <player ref="user1" />
             <player ref="user2" />
-            <asked question="ID_1">
+            <asked question="1">
                 <givenanswer player="user1">Dummy answer 1.</givenanswer>
                 <givenanswer player="user2">Dummy answer 2.</givenanswer>
             </asked>
-            <asked question="ID_2">
+            <asked question="2">
                 <givenanswer player="user1">Dummy answer 1.</givenanswer>
                 <givenanswer player="user2">Dummy answer 2.</givenanswer>
             </asked>

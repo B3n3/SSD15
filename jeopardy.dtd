@@ -13,7 +13,7 @@
 <!ATTLIST category name ID #REQUIRED>
 
 <!ELEMENT question (text, answer, answer+)>
-<!ATTLIST question id ID #REQUIRED
+<!ATTLIST question id CDATA #REQUIRED
                    value (100|200|500|750|1000) #REQUIRED>
 
 <!ELEMENT text (#PCDATA)>
@@ -46,7 +46,7 @@
 <!ATTLIST player ref IDREF #REQUIRED>
 
 <!ELEMENT asked (givenanswer*)>
-<!ATTLIST asked question IDREF #REQUIRED>
+<!ATTLIST asked question CDATA #REQUIRED>
 
 <!ELEMENT givenanswer (#PCDATA)>
 <!ATTLIST givenanswer player IDREF #REQUIRED>

@@ -18,6 +18,15 @@
             <xsd:selector xpath="games/game/asked" />
             <xsd:field xpath="@question" />
         </xsd:keyref>
+
+        <xsd:unique name="UniqueQuestionID">
+            <xsd:selector xpath="categories/category/question"/>
+            <xsd:field xpath="@id"/>
+        </xsd:unique>
+        <xsd:unique name="UniqueSessionID">
+            <xsd:selector xpath="games/game"/>
+            <xsd:field xpath="@session"/>
+        </xsd:unique>
     </xsd:element>
 
     <xsd:complexType name="jeopardyType">
@@ -86,7 +95,7 @@
             <xsd:element name="text" type="xsd:string" minOccurs="1" maxOccurs="1" />
             <xsd:element name="answer" type="answerType" minOccurs="2" maxOccurs="unbounded" />
         </xsd:sequence>
-        <xsd:attribute name="id" type="xsd:ID" use="required" /> <!-- should be a 'nonnegative number' -->
+        <xsd:attribute name="id" type="xsd:positiveInteger" use="required" />
         <xsd:attribute name="value" type="questionValuesEnum" use="required" />
     </xsd:complexType>
 
@@ -143,7 +152,7 @@
             <xsd:element name="player" type="playerType" minOccurs="2" maxOccurs="2" />
             <xsd:element name="asked" type="askedType" minOccurs="0" maxOccurs="10" />
         </xsd:sequence>
-        <xsd:attribute name="session" type="xsd:ID" use="required" /> <!-- needs to be a string -->
+        <xsd:attribute name="session" type="xsd:string" use="required" />
     </xsd:complexType>
 
     <xsd:complexType name="playerType">
@@ -154,7 +163,7 @@
         <xsd:sequence>
             <xsd:element name="givenanswer" type="givenanswerType" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
-        <xsd:attribute name="question" type="xsd:IDREF" use="required" />
+        <xsd:attribute name="question" type="xsd:positiveInteger" use="required" />
     </xsd:complexType>
 
     <xsd:complexType name="givenanswerType">
