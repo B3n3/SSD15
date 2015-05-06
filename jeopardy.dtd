@@ -1,0 +1,52 @@
+<!ELEMENT jeopardy (overview?, categories?, users?, games?)>
+
+<!ELEMENT overview (#PCDATA | p | a)*>
+
+<!ELEMENT p (#PCDATA | p | a)*>
+
+<!ELEMENT a (#PCDATA)>
+<!ATTLIST a href CDATA #REQUIRED>
+
+<!ELEMENT categories (category*)>
+
+<!ELEMENT category (question*)>
+<!ATTLIST category name ID #REQUIRED>
+
+<!ELEMENT question (text, answer, answer+)>
+<!ATTLIST question id ID #REQUIRED
+                   value (100|200|500|750|1000) #REQUIRED>
+
+<!ELEMENT text (#PCDATA)>
+
+<!ELEMENT answer (#PCDATA)>
+<!ATTLIST answer correct (yes|no) "no">
+
+<!ELEMENT users (user*)>
+
+<!ELEMENT user (password, (fullname | name), birthdate, email*)>
+<!ATTLIST user username ID #REQUIRED
+               gender (male|female) #IMPLIED>
+
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT fullname (#PCDATA)>
+<!ELEMENT birthdate (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+
+<!ELEMENT name (firstname, lastname)>
+
+<!ELEMENT firstname (#PCDATA)>
+<!ELEMENT lastname (#PCDATA)>
+
+<!ELEMENT games (game*)>
+
+<!ELEMENT game (player, player, asked*)>
+<!ATTLIST game session ID #REQUIRED>
+
+<!ELEMENT player EMPTY>
+<!ATTLIST player ref IDREF #REQUIRED>
+
+<!ELEMENT asked (givenanswer*)>
+<!ATTLIST asked question IDREF #REQUIRED>
+
+<!ELEMENT givenanswer (#PCDATA)>
+<!ATTLIST givenanswer player IDREF #REQUIRED>

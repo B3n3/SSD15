@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Semistrukturierte Daten - VU 184.705 (2.0)</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="ue2_files/rendering-all.css" media="all" type="text/css">
+	<link rel="stylesheet" href="ue2_files/rendering-print.css" media="print" type="text/css">
+
+    <style type="text/css">
+      .tcenter {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .table1 {
+        border-collapse: collapse;
+      }
+      .table1 th {
+        border: 1px inset black;
+        padding: 1px;
+      }
+      .table1 td {
+        border: 1px inset black;
+        padding: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tucsWrap">
+      <a name="top"></a>
+      <div id="tucsHeader">
+        <p class="tucsSkip"><a href="#content">Skip to Content</a></p>
+        <div id="tucsBanner">
+  <img src="ue2_files/bgbanner.png" usemap="#tucsBannerMap" alt="">
+  <map name="tucsBannerMap" id="tucsbannermap">
+	    <area shape="rect" coords="58,15,105,62" alt="TU Wien" href="http://www.tuwien.ac.at/">
+	    <area shape="rect" coords="111,15,158,63" alt="Fakultät für Informatik" href="http://www.informatik.tuwien.ac.at/">
+	    <area shape="rect" coords="167,15,269,62" alt="DBAI" href="http://www.dbai.tuwien.ac.at/">
+	    <area shape="rect" coords="468,44,666,93" alt="Database and Artificial Intelligence Group" href="http://www.dbai.tuwien.ac.at/">
+  </map>
+</div>
+
+
+        <div id="tucsNav">
+          <span class="tucsSkip">Top-level Navigation:</span>
+          <ul id="tucsMain">
+	    <li><a href="http://www.dbai.tuwien.ac.at/staff/index.html">Staff</a></li>
+	    <li class="tucsCurrent"><a href="http://www.dbai.tuwien.ac.at/education/">Education</a></li>
+	    <li><a href="http://www.dbai.tuwien.ac.at/research/index.html">research</a></li>
+	    <li><a href="http://www.dbai.tuwien.ac.at/address/index.html">Contact</a></li>
+	    <li class="tucsLast"><a href="http://www.dbai.tuwien.ac.at/service/index.html">Services</a></li>
+          </ul>
+          <span class="tucsSkip">Current-level Navigation:</span>
+          <ul id="tucsSub">
+	    <li><a href="http://www.dbai.tuwien.ac.at/education/ssd/current/index.html">lecture</a></li>
+	    <li class="tucsCurrent">exercises</li>
+          </ul>
+        </div>
+        <p id="tucsPath">
+          <span class="tucsSkip">Path:</span>
+          <a href="http://www.dbai.tuwien.ac.at/index.html">DBAI</a> &gt;
+          <a href="http://www.dbai.tuwien.ac.at/education/">Education</a> &gt;
+	  <a href="http://www.dbai.tuwien.ac.at/education/ssd">semistructured data</a> &gt;
+	  <a href="http://www.dbai.tuwien.ac.at/education/ssd/current/exercise.html">exercise</a> &gt;
+	  exercise 2
+        </p>
+        <p id="tucsTools">
+          <span class="tucsSkip">Tools:</span>
+	  <a href="#" onclick="window.print(); return false">Drucken</a>
+        </p>
+	
+        <hr class="tucsSkip">
+      </div>
+      <a name="content"></a>
+      <div id="tucsContent">
+	<!-- CONTENT START -->
+	
+	<h1>Exercise 2</h1>
+<p><b>(10 points)</b></p>
+
+<p>
+    The goal in this year's exercise is to develop an XML-based format 
+to represent data for the quiz game "Jeopardy!". In Exercise 2 you will 
+create an XML Schema and XML document and in Exercise 3
+	you will be querying and transforming this document with XML-related 
+technologies.
+</p>
+
+<p>
+    In Jeopardy two players compete against each other. The game 
+displays questions of different value in different categories. Each 
+player chooses alternately one of these questions. Then, the question 
+will be displayed and the players can choose one or more answers. At 
+least one answer is correct. If the answer is correct the players 
+account is increased by the value of the question. The player with the 
+highest account balance wins.
+</p>
+
+<p>
+    <em>Remark</em>: The following data format can be seen as a savegame for Jeopardy.
+</p>
+
+<p>
+    In this exercise we will develop the XML Schema and an XML Document, that validates
+	against the XML Schema. Afterwards, we will translate this XML Schema into a Document
+	Type Definition (DTD).
+</p>
+
+<h2>XML Schema <code>jeopardy.xsd</code></h2>
+
+<p>
+   The first part of this exercise consists of writing an XML Schema document <code>jeopardy.xsd</code>.
+   
+   The XML Schema should allow for XML Documents according to the following definitions:
+</p>
+
+<h3>Element <code>quiz</code></h3>
+
+<p>
+    The root element <code>jeopardy</code> stores all the relevant information for Jeopardy.
+</p>
+<p>
+    It contains the following 4 child elements in exactly this order, but each element is <b>optional</b>:
+</p>
+<ul>
+    <li><code>overview</code></li>
+    <li><code>categories</code></li>
+    <li><code>users</code></li>
+    <li><code>games</code></li>
+</ul>
+
+<a name="elementOverview"></a>
+<h3>Element <code>overview</code></h3>
+<p>
+    The element <code>overview</code> is used to give a game description. It can contain elements <code>p</code> and <code>a</code>, and addtionally, also text (in any order, with any multiplicity). The element <code>a</code> contains just text and has an attribute <code>href</code>, which contains a link to some other page. The element <code>p</code> can contain again an elements <code>p</code> and <code>a</code>, and additionally, also text (again in any order, with any multiplicity).
+</p>
+<p>For example</p>
+<p><code>&lt;overview&gt;&lt;p&gt;This is an &lt;a 
+href="example.htm"&gt;example&lt;/a&gt; &lt;p&gt;text 
+&lt;/p&gt;!&lt;/p&gt; &lt;/overview&gt;</code></p>
+<p>is a valid overview element.</p>
+
+<a name="elementCategories"></a>
+<h3>Element <code>categories</code></h3>
+<p>
+    The element <code>categories</code> has no attributes and is a child element of <code>jeopardy</code>. The subtree rooted at <code>categories</code> saves the categories and the questions, which belong to this category. It may contain an unbounded number of <code>category</code> elements.
+</p>
+
+<a name="elementCategory"></a>
+<h3>Element <code>category</code></h3>
+<p>
+    Each <code>category</code>  element has a <code>name</code> attribute, which contains a unique category name and may have an unbounded number of <code>question</code> elements as children.
+</p>
+
+<a name="elementQuestion"></a>
+<h3>Element <code>question</code></h3>
+<p>
+    The element <code>question</code> stores a question with its answers. It contains in this order: 
+	</p><ol>
+	   <li>exactly one <code>text</code> element, which stores the question as string; and</li>
+	   <li>at least two <code>answer</code> elements.</li>
+	</ol>
+	
+	The <code>question</code> element has two attributes: 
+	<ul>
+	    <li>an <code>id</code>, which is a nonnegative number and should globally identify this question;</li>
+        <li>and a <code>value</code>, which gives the value of the question and can take one of the following values: "100", "200", "500", "750" and "1000".</li>
+	</ul>
+<p></p>
+
+<a name="elementAnswer"></a>
+<h3>Element <code>answer</code></h3>
+<p>
+    The element <code>answer</code> describes an answer of some question. It contains a string and has a <code>correct</code> attribute. The attribute <code>correct</code> can either take the value "yes" or "no". If the attribute <code>correct</code> is missing, it should take the value "no".
+</p>
+
+<a name="elementUsers"></a>
+<h3>Element <code>users</code></h3>
+<p>
+    The element <code>users</code> has no attributes and is a child element of <code>jeopardy</code>. The subtree rooted at <code>users</code> saves the users. It may contain an unbounded number of <code>user</code> elements.
+</p>
+
+<a name="elementUser"></a>
+<h3>Element <code>user</code></h3>
+<p>
+    The element <code>user</code> describes a possible Jeopardy! player.
+	
+    It has the attribute <code>username</code>, which should be unique. Additionally, it may have the optional attribute <code>gender</code> which can only take the values "male" or "female".
+	
+	The element <code>user</code> has the following child elements in exactly this order:
+</p>
+<ol>
+    <li>Exactly one element <code>password</code> that contains a string.</li>
+    <li><ul>
+	     <li>Either the element <code>fullname</code> that contains a string, or</li>
+		 <li>the element <code>name</code> which contains the elements <code>firstname</code> and <code>lastname</code> (both contain a string).</li>
+		</ul>
+	</li>
+    <li>The element <code>birthdate</code> that contains a date in the format: YYYY-MM-DD.</li>
+	<li>An unbounded number of <code>email</code> elements, all of which contain a string.</li>
+</ol>
+
+<a name="elementGames"></a>
+<h3>Element <code>games</code></h3>
+<p>
+    The element <code>games</code> has no attributes, but may contain an unbounded number of <code>game</code> elements.
+</p>
+
+<a name="elementGame"></a>
+<h3>Element <code>game</code></h3>
+<p>
+    The element <code>game</code> describes a Jeopardy! game. It has an attribute <code>session</code> which uniquely
+	identifies the game. The <code>session</code> attribute is a string.
+	
+	It has the following child elements in exactly this order:
+</p><ul>
+    <li>Exactly two <code>player</code> elements; and</li>
+    <li>At most ten <code>asked</code> elements.</li>
+</ul><p></p>
+
+<a name="elementPlayer"></a>
+<h3>Element <code>player</code></h3>
+<p>
+    The <code>player</code> element identifies one player of a game. The element has no content. Its only attribute
+	<code>ref</code> references a <code>username</code> attribute of a <code>user</code> element.
+</p>
+
+<a name="elementAsked"></a>
+<h3>Element <code>asked</code></h3>
+<p>
+    The element <code>asked</code> saves the information on the already asked questions and the given answers. The asked
+	question is stored in the <code>question</code> attribute, which must refer to an <code>id</code> attribute of a 
+    <code>question</code> element. It may have an unbounded number of <code>givenanswer</code> elements as children.
+</p>
+
+<a name="elementGivenanswer"></a>
+<h3>Element <code>givenanswer</code></h3>
+<p>
+    The element <code>givenanswer</code> contains a string, i.e. the answer, and has a required <code>player</code> attribute which references
+	the <code>username</code> attribute of a <code>user</code> element.
+</p>
+<p>
+    <em>Remark</em>: You don't need to ensure that the text of the given
+ answer corresponds to one of the answers in the corresponding question 
+element.
+	Additionally, you also don't need to check if the player attribute is 
+one of the players given by the <code>player</code> elements. Are these
+	checks possible with XML Schema? (think about it for the assignment discussion)
+</p>
+
+<a name="keys">
+<h3>Keys</h3>
+<p>Add the following keys to your document:
+</p><ul>
+    <li><code>userKeys</code> for the usernames.</li>
+    <li><code>questionKeys</code> for the questions.</li>
+</ul>
+The keys are referenced in the following fields:
+<ul><li><code>userKeys</code> is referenced in the <code>ref</code> attribute of the <code>player</code> element and in the <code>player</code> attribute of the <code>givenanswer</code> element.</li>
+    <li><code>questionKeys</code> is referenced in the <code>question</code> attribute of the <code>asked</code> element.</li></ul><p></p>
+    
+
+
+<h3>General Remarks</h3>
+
+<p>Please pay attention to the following remarks:</p>
+<ul>
+    <li>If nothing else is mentioned all elements and attributes are 
+required. The word "may" hints you to optional elements or attributes.</li>
+    <li>All numbers are integers.</li>
+</ul>
+
+<h3>Summary</h3>
+
+<ul>
+   <li><b>Files</b>: <code>jeopardy.xsd</code></li>
+   <li><b>Maximum number of points</b>: 5</li>
+</ul>
+
+
+<h2>XML Document <code>jeopardy.xml</code></h2>
+
+<p>
+Create an XML Document <code>jeopardy.xml</code> for the XML Schema <code>jeopardy.xsd</code>. The XML Document should satisfy the following criteria:
+</p>
+<ul>
+    <li>Create at least three <code>category</code> elements.</li>
+    <li>Create at least six <code>question</code> elements with at least 3 answers each.</li>
+    <li>Create four users. Please make sure that you have male and female users.</li>
+    <li>Create at least one <code>game</code> element.</li>
+    <li>The game should have at least two <code>asked</code> elements.</li>
+    <li>Make sure that each <code>asked</code> element has at least two <code>givenanswer</code> elements.</li>
+</ul>
+
+<p>
+    Make sure that your XML Document <code>jeopardy.xml</code> validates against your XML Schema <code>jeopardy.xsd</code>.
+    This can be done with the following command (after you have installed <code>xmllint</code>:
+</p>
+<p>
+    <code>xmllint --schema jeopardy.xsd jeopardy.xml</code>
+</p>
+</a><p><a name="keys">
+    Downloads and user instructions to <code>xmllint</code> can be found on our </a><a href="http://www.dbai.tuwien.ac.at/education/ssd/current/exercise.html#xmllint">exercise</a> page.
+</p>
+
+<h3>Summary</h3>
+
+<ul>
+    <li><b>Files</b>: <code>jeopardy.xml</code></li>
+    <li><b>Maximum number of points</b>: 3</li>
+</ul>
+
+<h2>Document Type Definition (DTD) <code>jeopardy.dtd</code></h2>
+
+<p>
+    Create a Document Type Definition (DTD) <code>jeopardy.dtd</code>, for which the most
+    XML Documents are valid, which are also valid for the XML Schema <code>jeopardy.xsd</code>.
+</p>
+
+<p>
+    There are some specifications in your XML Schema file which have a very complicated or no
+    equivalent at all in DTDs. Which functionalities are these? (think about it for the assignment discussion)
+</p>
+<p>
+Especially you don't need to create large number ranges as enumerations 
+(e.g. "Numbers between 1 and 72 as an enumeration of 72 numbers).
+</p>
+
+<h3>Bemerkungen</h3>
+
+<p>
+    Make sure that your XML Document <code>jeopardy.xml</code> validates against your DTD    <code>jeopardy.dtd</code>.
+        This can be done with the following command (after you have installed <code>xmllint</code>:
+        </p>
+
+        <p>
+            <code>xmllint --dtdvalid jeopardy.dtd jeopardy.xml</code>
+</p>
+
+
+<h3>Summary</h3>
+
+<ul>
+    <li><b>Files</b>: <code>jeopardy.dtd</code></li>
+    <li><b>Maximum number of points</b>: 2</li>
+</ul>
+
+<h2>Submission</h2>
+
+<p>In total you have to upload the following files:</p>
+
+<ul>
+    <li><code>jeopardy.xml</code></li>
+    <li><code>jeopardy.xsd</code></li>
+    <li><code>jeopardy.dtd</code></li>
+</ul>
+
+<p>
+These files should be zipped and the resulting ZIP-file <code>exercise2.zip</code> has to be
+uploaded until <span style="background-color:yellow">07.05.2015</span> 23:59 in our
+    <a href="http://minteka.dbai.tuwien.ac.at/cman/">CourseManager</a>. 
+    We will grade the last uploaded solution.
+</p>
+
+<h3>Assignment discussion</h3>
+
+<p>
+    You can receive at most 10 points for Exercise 2. During the 
+assignment discussion we will not only check your solution for 
+correctness, but will also ask some questions regarding the used 
+technologies. Please be prepared to answer the questions mentioned in 
+this document as well. 
+</p>
+<p> To obtain the full number of points your solution has to be solved 
+correctly and you have to be able to explain it. Copied solutions are 
+awarded 0 points!</p>
+<p> In your own interest come <b>ontime</b> to your assignment 
+discussion or else we don't guarantee that your solution is completely 
+checked in the remaining time of the reserved slot. 
+
+<!-- CONTENT END -->
+
+
+	<!-- CONTENT END -->
+	</p><div style="text-align:right;">
+		
+    <!--Letzte &Auml;nderung: 2015-03-25 19:42-->
+      	</div>	
+      </div>
+
+      <!--include virtual="/_resources/SSI/disclaimer.html" -->
+
+      <div id="tucsFooter">
+     <hr class="tucsSkip">
+     <p><a href="http://www.dbai.tuwien.ac.at/">Home</a> /
+     <a href="http://www.dbai.tuwien.ac.at/address/">Kontakt</a> /
+     <a href="mailto:webmaster@dbai.tuwien.ac.at">Webmaster</a> /
+     Offenlegung gemäß § 25 Mediengesetz: Inhaber der Website ist das
+     Institut für Informationssysteme an der Technischen Universität Wien,
+     1040 Wien. Die TU Wien distanziert sich von den Inhalten aller
+     extern gelinkten Seiten und übernimmt diesbezüglich keine Haftung. /
+     <a href="http://www.tuwien.ac.at/impressum/disclaimer/" onclick="javascript:window.open('http://www.tuwien.ac.at/impressum/disclaimer/','d','width=680,height=500,scrollbars'); return false">Disclaimer</a>.
+     </p>
+</div>
+
+
+      <a name="bottom"></a>
+    </div>
+  
+
+</body></html>

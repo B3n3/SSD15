@@ -1,0 +1,94 @@
+<jeopardy>
+    <categories>
+        <category name="TU">
+            <question id="ID_1" value="100">
+                <text>Dummy question 1?</text>
+                <answer correct="yes">Dummy answer 1.</answer>
+                <answer correct="no">Dummy answer 2.</answer>
+                <answer>Dummy answer 3.</answer>
+            </question>
+            <question id="ID_2" value="200">
+                <text>Dummy question 2?</text>
+                <answer correct="yes">Dummy answer 1.</answer>
+                <answer correct="no">Dummy answer 2.</answer>
+                <answer>Dummy answer 3.</answer>
+            </question>
+        </category>
+        <category name="SSD">
+            <question id="ID_3" value="200">
+                <text>Dummy question 3?</text>
+                <answer correct="yes">Dummy answer 1.</answer>
+                <answer>Dummy answer 2.</answer>
+                <answer>Dummy answer 3.</answer>
+            </question>
+            <question id="ID_4" value="500">
+                <text>Dummy question 4?</text>
+                <answer correct="yes">Dummy answer 1.</answer>
+                <answer correct="no">Dummy answer 2.</answer>
+                <answer>Dummy answer 3.</answer>
+            </question>
+        </category>
+        <category name="Web">
+            <question id="ID_5" value="500">
+                <text>Dummy question 5?</text>
+                <answer correct="yes">Dummy answer 1.</answer>
+                <answer correct="no">Dummy answer 2.</answer>
+                <answer>Dummy answer 3.</answer>
+            </question>
+            <question id="ID_6" value="1000">
+                <text>Dummy question 6?</text>
+                <answer correct="yes">Dummy answer 1.</answer>
+                <answer>Dummy answer 2.</answer>
+                <answer>Dummy answer 3.</answer>
+            </question>
+        </category>
+    </categories>
+    <users>
+        <user username="user1" gender="male">
+            <password>password1</password>
+            <fullname>User1 Lastname</fullname>
+            <birthdate>1999-01-01</birthdate>
+            <email>user@user.com</email>
+            <email>user@user.at</email>
+        </user>
+        <user username="user2" gender="female">
+            <password>password2</password>
+            <fullname>User2 Lastname</fullname>
+            <birthdate>1996-02-02</birthdate>
+            <email>user2@user.com</email>
+            <email>user2@user.at</email>
+        </user>
+        <user username="user3" gender="female">
+            <password>password3</password>
+            <name>
+                <firstname>Firstname</firstname>
+                <lastname>Lastname</lastname>
+            </name>
+            <birthdate>1992-05-02</birthdate>
+            <email>user3@user.com</email>
+            <email>user3@user.at</email>
+        </user>
+        <user username="user4" gender="male">
+            <password>password4</password>
+            <name>
+                <firstname>Firstname 4</firstname>
+                <lastname>Lastname 4</lastname>
+            </name>
+            <birthdate>1992-03-23</birthdate>
+        </user>
+    </users>
+    <games>
+        <game session="SessionID_1">
+            <player ref="user1" />
+            <player ref="user2" />
+            <asked question="ID_1">
+                <givenanswer player="user1">Dummy answer 1.</givenanswer>
+                <givenanswer player="user2">Dummy answer 2.</givenanswer>
+            </asked>
+            <asked question="ID_2">
+                <givenanswer player="user1">Dummy answer 1.</givenanswer>
+                <givenanswer player="user2">Dummy answer 2.</givenanswer>
+            </asked>
+        </game>
+    </games>
+</jeopardy>
