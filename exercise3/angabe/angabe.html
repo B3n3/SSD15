@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Semistrukturierte Daten - VU 184.705 (2.0)</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="angabe_files/rendering-all.css" media="all" type="text/css">
+	<link rel="stylesheet" href="angabe_files/rendering-print.css" media="print" type="text/css">
+
+    <style type="text/css">
+      .tcenter {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .table1 {
+        border-collapse: collapse;
+      }
+      .table1 th {
+        border: 1px inset black;
+        padding: 1px;
+      }
+      .table1 td {
+        border: 1px inset black;
+        padding: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tucsWrap">
+      <a name="top"></a>
+      <div id="tucsHeader">
+        <p class="tucsSkip"><a href="#content">Skip to Content</a></p>
+        <div id="tucsBanner">
+  <img src="angabe_files/bgbanner.png" usemap="#tucsBannerMap" alt="">
+  <map name="tucsBannerMap" id="tucsbannermap">
+	    <area shape="rect" coords="58,15,105,62" alt="TU Wien" href="http://www.tuwien.ac.at/">
+	    <area shape="rect" coords="111,15,158,63" alt="Fakultät für Informatik" href="http://www.informatik.tuwien.ac.at/">
+	    <area shape="rect" coords="167,15,269,62" alt="DBAI" href="http://www.dbai.tuwien.ac.at/">
+	    <area shape="rect" coords="468,44,666,93" alt="Database and Artificial Intelligence Group" href="http://www.dbai.tuwien.ac.at/">
+  </map>
+</div>
+
+
+        <div id="tucsNav">
+          <span class="tucsSkip">Top-level Navigation:</span>
+          <ul id="tucsMain">
+	    <li><a href="http://www.dbai.tuwien.ac.at/staff/index.html">Staff</a></li>
+	    <li class="tucsCurrent"><a href="http://www.dbai.tuwien.ac.at/education/">Education</a></li>
+	    <li><a href="http://www.dbai.tuwien.ac.at/research/index.html">research</a></li>
+	    <li><a href="http://www.dbai.tuwien.ac.at/address/index.html">Contact</a></li>
+	    <li class="tucsLast"><a href="http://www.dbai.tuwien.ac.at/service/index.html">Services</a></li>
+          </ul>
+          <span class="tucsSkip">Current-level Navigation:</span>
+          <ul id="tucsSub">
+	    <li><a href="http://www.dbai.tuwien.ac.at/education/ssd/current/index.html">lecture</a></li>
+	    <li class="tucsCurrent">exercises</li>
+          </ul>
+        </div>
+        <p id="tucsPath">
+          <span class="tucsSkip">Path:</span>
+          <a href="http://www.dbai.tuwien.ac.at/index.html">DBAI</a> &gt;
+          <a href="http://www.dbai.tuwien.ac.at/education/">Education</a> &gt;
+	  <a href="http://www.dbai.tuwien.ac.at/education/ssd">semistructured data</a> &gt;
+	  <a href="http://www.dbai.tuwien.ac.at/education/ssd/current/exercise.html">exercise</a> &gt;
+	  exercise 3
+        </p>
+        <p id="tucsTools">
+          <span class="tucsSkip">Tools:</span>
+	  <a href="#" onclick="window.print(); return false">Drucken</a>
+        </p>
+	
+        <hr class="tucsSkip">
+      </div>
+      <a name="content"></a>
+      <div id="tucsContent">
+	<!-- CONTENT START -->
+	
+    		<h1>Exercise 3</h1>
+<p><b>(15 points)</b></p>
+
+<p>
+    The goal in this year's exercise is to develop an XML-based format 
+to represent data for the quiz game "Jeopardy!". In Exercise 2 you will 
+create an XML Schema and XML document and in Exercise 3
+	you will be querying and transforming this document with XML-related 
+technologies.
+</p>
+
+<p>
+    In Jeopardy two players compete against each other. The game 
+displays questions of different value in different categories. Each 
+player chooses alternately one of these questions. Then, the question 
+will be displayed and the players can choose one or more answers. At 
+least one answer is correct. If the answer is correct the players 
+account is increased by the value of the question. The player with the 
+highest account balance wins.
+</p>
+
+<p>
+    <em>Remark</em>: The following data format can be seen as a savegame for Jeopardy.
+</p>
+
+<p>This exercise consists of two parts. First, we will use DOM and SAX to access and modify
+   XML documents. Second, we will evaluate an xQuery expression over an XML document.
+</p>
+
+<h2>Template</h2>
+
+In the following ZIP-file you will find a general template for this 
+exercise. This template also contains an ant-script (build.xml) which
+can be used to test your solution. A similar ant-script (with more test 
+cases) will be used during the assignment discussions.
+
+<ul>
+	<li><a href="http://www.dbai.tuwien.ac.at/education/ssd/current/exercise/ssd-ss15-exercise3-template.zip">Template SSD Bsp3</a></li>
+</ul>
+
+<em>Please, remember:</em>
+<ul>
+    <li>It is <b>mandatory</b> that you use this template!</li>
+	<li>All files and paths in this description refer to this template.</li>
+	<li>Precise instructions for each ant target can be found in the sections below.</li>
+    <li>We have also included an XML document and a schema file for your convenience. These files
+	    are those that were created in exercise 2. They can be found in <code>resources/jeopardy.xml</code> and
+		<code>resources/jeopardy.xsd</code>. These files will be used and are configured as input for the
+		ant targets.</li>
+</ul>
+
+<h2>DOM and SAX</h2>
+
+<p>Imagine that your application is divided into a client that displays 
+the Jeopardy! game and a server that processes and manages Jeopardy! 
+games.
+   During the course of the game the client displays a question to a 
+player and the player chooses appropriate answers. The player then 
+commits
+   his answers and the client sends the players answers to the server. 
+The client uses the following "move" XML document for this 
+communication:
+
+<code>
+	</code></p><pre><code>    
+       &lt;move session="abc"&gt;
+          &lt;player&gt;Lisa&lt;/player&gt;
+          &lt;question&gt;5&lt;/question&gt;
+          &lt;answer&gt;What is Semistructured Data?&lt;/answer&gt;
+          &lt;answer&gt;What is Web Engineering?&lt;/answer&gt;
+       &lt;/move&gt;
+	</code></pre><code>
+</code>
+<p><code>  </code>   
+  
+  This XML document states that in session "abc" the player "Lisa" 
+selected for the question with the id "5" two answers given in the <code>&lt;answer&gt;</code> elements.
+  
+  </p>
+<p>Your goal is to manipulate the <code>jeopardy.xml</code> document with DOM in such a way, that the above "move" is stored in the document.
+  The "move" document is parsed using SAX.
+  </p>
+<p>You don't have to handle any exceptions, but you have to ensure that your resulting document validates against <code>jeopardy.xsd</code>.
+  </p>
+  
+<p></p>
+<h3>Description of Classes</h3>
+
+<p>The template provides you two classes. The class <code>SSD</code> contains the main program logic. The class <code>JeopardyMoveHandler</code> is used
+   as a SAX handler for parsing the "move" document and manipulating the Jeopardy document. A detailed description follows:
+   
+   </p><ul>
+      <li><em>Class:</em> <b>SSD</b>
+        <ul><li><em>Variables:</em>
+            <ul><li><code>static DocumentBuilderFactory documentBuilderFactory</code>: <br>stores an instance of a document builder factory.</li>
+              <li><code>static DocumentBuilder documentBuilder</code>: <br>stores an instance of a document builder.</li>
+            </ul>
+              </li>
+              <li><em>Methods:</em>
+	             <ul><li><code>static void main(String [] args) throws Exception</code>: <br>Entry point for the program. Parses the program arguments and calls <code>initialize</code> and <code>transform</code>.</li>
+	                 <li><code>static void initialize() throws Exception</code>: <br>Initializes the <code>documentBuilderFactory</code> and the <code>documentBuilder</code> variables.</li>
+		             <li><code>static void transform(String inputPath, String movePath, String outputPath) throws Exception</code>: <br><b>Your task is to implement this method</b>. First, you have to create a Document
+		                       from the filename given in the <code>inputPath</code> variable. Second, you have to set up the SAX parser, in order to parse the XML document given in the <code>movePath</code> variable.
+		                       For this you have to create an instance of the <code>JeopardyMoveHandler</code> class, which needs the previously created Document as an argument to its constructor. Third, you parse
+		                       the move document. The <code>JeopardyMoveHandler</code> will change the Document. Last, retrieve this document with the method <code>getDocument()</code> and store this document
+		                       in the file given by the <code>outputPath</code> variable.</li>
+		             <li><code>static void exit(String message)</code>: <br>You can use this method to output an error and exit the program.</li>
+                 </ul></li>
+        </ul>
+      </li>
+       <li><em>Class:</em> <b>JeopardyMoveHandler</b>
+           <ul><li><em>Variables:</em>
+                   <ul><li><code>static XPath xPath</code>: <br>use this XPath instance to compile xPath queries that can be evaluated over the document or specific context nodes.</li>
+                       <li><code>Document jeopardyDoc</code>: <br>stores the DOM document of the Jeopardy XML file.</li>
+                       <li><code>String eleText</code>: <br>stores the text content of XML elements.</li>
+                       <li><b>You can specifiy additional variables in this class.</b></li>
+                   </ul>
+                </li>
+                <li><em>Methods:</em>
+                    <ul><li><code>JeopardyMoveHandler(Document doc)</code>: <br>The constructor which has a Document variable as argument.</li>
+                        <li><code>void characters(char[] text, int start, int length)</code>: <br>SAX calls this method, when it sees character data. This character data is stored in the <code>eleText</code> variable.</li>
+                        <li><code>Document getDocument()</code>: <br>Returns the XML document stored in this class.</li>
+                        <li><b>Specify additional methods to parse the "move" document (e.g.: <code>startElement</code>, etc.) and modify the <code>jeopardyDoc</code> document.</b></li>
+                    </ul></li>
+         </ul>
+      </li>
+    </ul>       
+<p></p>
+
+<h3>Call of program and result</h3>
+
+<p>The code implemented in <code>src/ssd/SSD.java</code> can be run using three program arguments. The first is a Jeopardy document as input (e.g. <code>jeopardy.xml</code>
+   from exercise 2 or the file located in the <code>resources</code> folder). The second is a "move" document (e.g. <code>resources/jeopardy-move.xml</code>). The last
+   is a Jeopardy document as output (e.g. <code>output/jeopardy.xml</code>). We have configured two ant-targets:
+   
+   </p><ul><li><code>ant run-dry</code>: <br> applies the "move" document <code>resources/jeopardy-move.xml</code> to the Jeopardy document <code>resources/jeopardy.xml</code> and
+       stores the output to <code>output/jeopardy-out.xml</code>.</li>
+       <li><code>ant run-persistent</code>: <br> applies the "move" document <code>resources/jeopardy-move.xml</code> to the Jeopardy document <code>resources/jeopardy.xml</code> and
+       stores the output to <code>resources/jeopardy.xml</code>. Therefore, the input file will be overwritten and the "move" is made persistent.</li></ul>
+       
+   We provide a file <code>resources/jeopardy-sample-out.xml</code> that shows the output of the program by applying <code>resources/jeopardy-move.xml</code> to <code>resources/jeopardy.xml</code>.<p></p>
+
+<h3>Hints</h3>
+You can evaluate XPath expressions over an XML document (or also relative to a node) using the following statements:
+
+<pre>   <code>
+XPathExpression xpathExpr = xPath.compile("//player");
+NodeList playerList = (NodeList)xpathExpr.evaluate(jeopardyDoc,
+                                                XPathConstants.NODESET);
+   </code>
+</pre>
+
+<h3>Summary</h3>
+
+<ul>
+	<li><b>Resulting Files</b>: <code>SSD.java</code> and <code>JeopardyMoveHandler.java</code></li>
+	<li><b>Total points</b>: 10</li>
+</ul>
+
+
+<h2>XQuery</h2>
+
+<p>In this exercise we will create an XQuery that evaluated over a 
+Jeopardy! document, will give you a list of games together with the 
+players and their correct answers.<br>
+   <b>The output should look as follows:</b>
+   
+<code>
+</code></p><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>&lt;stats&gt;<br>   &lt;session id="abc"&gt;<br>       &lt;correct player="Bart"&gt;1&lt;/correct&gt;<br>   &lt;/session&gt;<br>   &lt;session id="abcd"&gt;<br>       &lt;correct player="Bart"&gt;2&lt;/correct&gt;<br>       &lt;correct player="Lisa"&gt;4&lt;/correct&gt;<br>   &lt;/session&gt;<br>&lt;/stats&gt;</code></pre><code>
+</code>   
+
+The meaning of the document is as follows: In session "abc" the player "Bart" has "1" answer correct. In session "abcd" the player "Bart" has "2" answers correct and the player "Lisa" has "4" answers correct.
+To obtain such a document you can follow this guideline (optional):
+
+<h3>Part (a)</h3>
+
+<p>First, you create a query <code>src/xquery-a.xq</code> that outputs for the session "abcd" and the player "Bart" the correct <code>givenanswer</code> elements.
+
+<code>
+</code></p><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>&lt;correct&gt;<br>   &lt;givenanswer player="Bart"&gt;Who is Maggie?&lt;/givenanswer&gt;<br>   &lt;givenanswer player="Bart"&gt;Who is Sheldon Lee Cooper?&lt;/givenanswer&gt;<br>&lt;/correct&gt;</code></pre><code>
+</code>
+<p><code>  </code>  
+  
+  For this you join the <code>&lt;givenanswer&gt;</code> elements of this session and player, with the correct <code>&lt;answer&gt;</code> elements of the corresponding <code>&lt;question&gt;</code> elements having the same
+  <code>text()</code> content as the <code>&lt;givenanswer&gt;</code> element. Then, you output the <code>&lt;givenanswer&gt;</code> elements.<br>
+  
+  </p>
+<p>You can write this query in <code>src/xquery-a.xq</code>. The query can be evaluated over <code>resources/jeopardy.xml</code> using the following command:
+  
+</p>
+<ul>
+	<li><code>ant run-xquery-a</code></li>
+</ul>
+
+The output is written to <code>output/xquery-out-a.xml</code>.
+
+<p></p>
+
+<h3>Part (b)</h3>
+
+<p>Second, you create a query <code>src/xquery-b.xq</code> that uses the above query for each <code>&lt;game&gt;</code> element and counts the outputted <code>&lt;givenanswer&gt;</code> elements. Then, you create
+the XML document given above. 
+</p><p>You can write this query in <code>src/xquery-b.xq</code>. The query can be evaluated over <code>resources/jeopardy.xml</code> using the following command:
+  
+</p><ul>
+	<li><code>ant run-xquery-b</code></li>
+</ul>
+
+The output is written to <code>output/xquery-out-b.xml</code>.
+
+<p></p>
+
+<h3>Summary</h3>
+
+<p>You don't have to follow the guideline above. If your <code>xquery-b.xq</code> outputs the correct answer, you will get all points immediately. If not, you can still receive 2 points for having a correct output for Part (a) (<code>xquery-a.xq</code>).
+
+</p><ul>
+	<li><b>Resulting Files</b>: <code>xquery-b.xq</code> (optional <code>xquery-a.xq</code>)</li>
+	<li><b>Points</b>: 5 (optional if <code>xquery-b.xq</code> is not correct, then 2 points for a correct <code>xquery-a.xq</code>)</li>
+</ul><p></p>
+
+<h2>Upload</h2>
+
+<p>In order to create a zip file <code>ssd-exercise3-ss15.zip</code> you have to use the following command:</p>
+
+<ul>
+	<li><code>ant zip</code></li>
+</ul>
+
+<p>This zip file has to be uploaded in our  <a href="http://minteka.dbai.tuwien.ac.at/coursemanager/">CourseManager</a> until <span style="background-color:yellow">04.06.2014</span> at 23:59. The newest version
+will be checked during the assignment discussion.</p>
+
+<h3>Assignment discussion</h3>
+
+<p>
+    You can receive at most 15 points for Exercise 3. During the assignment discussion we will not only check your solution for correctness, but will also ask some questions regarding the used technologies. 
+</p>
+<p> To obtain the full number of points your solution has to be solved correctly and you have to be able to explain it. Copied solutions are awarded 0 points!</p>
+<p> In your own interest come <b>ontime</b> to your assignment discussion or else we don't guarantee that your solution is completely checked in the remaining time of the reserved slot. </p>
+
+
+
+	<!-- CONTENT END -->
+	<div style="text-align:right;">
+		
+    <!--Letzte &Auml;nderung: 2015-04-27 11:30-->
+      	</div>	
+      </div>
+
+      <!--include virtual="/_resources/SSI/disclaimer.html" -->
+
+      <div id="tucsFooter">
+     <hr class="tucsSkip">
+     <p><a href="http://www.dbai.tuwien.ac.at/">Home</a> /
+     <a href="http://www.dbai.tuwien.ac.at/address/">Kontakt</a> /
+     <a href="mailto:webmaster@dbai.tuwien.ac.at">Webmaster</a> /
+     Offenlegung gemäß § 25 Mediengesetz: Inhaber der Website ist das
+     Institut für Informationssysteme an der Technischen Universität Wien,
+     1040 Wien. Die TU Wien distanziert sich von den Inhalten aller
+     extern gelinkten Seiten und übernimmt diesbezüglich keine Haftung. /
+     <a href="http://www.tuwien.ac.at/impressum/disclaimer/" onclick="javascript:window.open('http://www.tuwien.ac.at/impressum/disclaimer/','d','width=680,height=500,scrollbars'); return false">Disclaimer</a>.
+     </p>
+</div>
+
+
+      <a name="bottom"></a>
+    </div>
+  
+
+</body></html>
