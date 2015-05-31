@@ -59,10 +59,18 @@ public class SSD {
      * @param outputPath Path to the xml file to print statistics.
      */
     private static void transform(String inputPath, String movePath, String outputPath) throws Exception {
-        /**
-         * * TODO **
-         */
-        //Insert your code here
+        Document jeopardyDocument = documentBuilder.parse(new File(inputPath));
+
+        JeopardyMoveHandler moveHandler = new JeopardyMoveHandler(jeopardyDocument);
+        XMLReader parser = XMLReaderFactory.createXMLReader();
+        parser.setContentHandler(moveHandler);
+        parser.parse(movePath);
+
+        Transformer trans = TransformerFactory.newInstance().newTransformer();
+        trans.setOutputProperty(OutputKeys.INDENT, "yes");
+        Document ready = moveHandler.getDocument();
+        trans.transform(new DOMSource(ready), new StreamResult(new File(outputPath)));
+
     }
 
     /**
