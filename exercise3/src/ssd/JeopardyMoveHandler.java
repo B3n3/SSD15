@@ -121,8 +121,10 @@ public class JeopardyMoveHandler extends DefaultHandler {
                 lst = (NodeList) ex2.evaluate(jeopardyDoc, XPathConstants.NODESET);
                 if (lst.getLength() < 1) // no games elem found !?
                 {
-                    System.err.println("Should never reach");
-                    return;
+                    Node jeopardy = jeopardyDoc.getElementsByTagName("jeopardy").item(0);
+                    Element games = jeopardyDoc.createElement("games");
+                    jeopardy.appendChild(games);
+                    lst = (NodeList) ex2.evaluate(jeopardyDoc, XPathConstants.NODESET);
                 }
 
                 Node games = lst.item(0);
