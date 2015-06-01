@@ -10,7 +10,7 @@ declare option saxon:output "indent=yes";
         {
             for $player in data($game/player/@ref)
             return
-                <correct player="{$player}">
+                <correct>
                 {
                 for $quID in $game/asked/@question
                 for $givenanswer in $game/asked/givenanswer[@player=$player]
