@@ -1,3 +1,6 @@
+declare namespace saxon = "http://saxon.sf.net/";
+declare option saxon:output "indent=yes";
+
 <stats>
 {
     for $game in (//game)
