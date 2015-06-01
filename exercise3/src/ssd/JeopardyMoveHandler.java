@@ -88,11 +88,6 @@ public class JeopardyMoveHandler extends DefaultHandler {
     }
 
     private void doWork() {
-        System.out.println(sessionID + " " + playerName + " " + questionID);
-        for (String answer : answers) {
-            System.out.println(answer);
-        }
-
         ArrayList<Element> answerElems = new ArrayList<>();
         for (String answer : answers) {
             Element e = jeopardyDoc.createElement("givenanswer");
